@@ -15,6 +15,12 @@
 		#todo-list {
 			margin-bottom: 30px;
 		}
+		.delete-btn{
+			float: right;
+		}
+		.todo-checked{
+			text-decoration: line-through;
+		}
 	</style>
 	<script src="js/libs/jquery.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
@@ -31,9 +37,10 @@
 	<div id="todo-list" class="row">
 		<div class="col-sm-4 col-sm-offset-4">
 			<div class="checkbox" ng-repeat="todo in todos">
-				<label>
-					<input type="checkbox" ng-click="deleteTodo(todo._id)">{{ todo.text }}
+				<label class="todo-checked">
+					<input type="checkbox" ng-click="checkTodo(todo._id)">{{ todo.text }}
 				</label>
+				<input type="button" class="btn btn-danger delete-btn" value="X" ng-click="deleteTodo(todo._id)"></input>
 			</div>
 		</div>
 	</div>

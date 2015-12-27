@@ -22,4 +22,11 @@ angular.module('todoController', [])
 					$scope.todos = data
 				})
 		}
+
+		$scope.checkTodo = function(id) {
+			Todos.check(id)
+				.success(function(data) {
+					$scope.todos = data
+				})
+		}
 	})
