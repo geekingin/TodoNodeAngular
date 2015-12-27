@@ -70,6 +70,28 @@ module.exports = function(app) {
     	})
     })
 
+    app.post('/api/todos/uncheck/:todo_id', function(req, res) {
+    	Todo.update({
+    		_id: req.params.todo_id
+    	},{
+    		$set:{
+    			done: false    			
+    		}
+    	},function(err, status) {
+    		if (err) {
+    			res.send(err) 
+    			return 
+    		}
+    		Todo.find(function(err, todos){
+    			if (err) {
+    				res.send(err) 
+    				return 
+    			}
+    			res.json(todos)
+    		})
+    	})
+    })
+
     app.get('*', function(req, res) {
         res.sendFile('./public/index.html')
     })

@@ -12,6 +12,9 @@ angular.module('todoService', [])
 			},
 			check: function(id) {
 				return $http.post('/api/todos/check/' + id)
+			},
+			uncheck: function(id) {
+				return $http.post('/api/todos/uncheck/' + id)
 			}
 		}
 	})

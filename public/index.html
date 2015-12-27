@@ -37,8 +37,8 @@
 	<div id="todo-list" class="row">
 		<div class="col-sm-4 col-sm-offset-4">
 			<div class="checkbox" ng-repeat="todo in todos">
-				<label class="todo-checked">
-					<input type="checkbox" ng-click="checkTodo(todo._id)">{{ todo.text }}
+				<label class="ng-class:todo.done?'todo-checked':''"  ng-click="toggleTodoStatus(todo)">
+					<input type="checkbox">{{ todo.text }}
 				</label>
 				<input type="button" class="btn btn-danger delete-btn" value="X" ng-click="deleteTodo(todo._id)"></input>
 			</div>
