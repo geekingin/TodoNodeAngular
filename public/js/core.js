@@ -1,5 +1,4 @@
 var scotchTodo = angular.module('scotchTodo', [])
-console.log('fdfd')
 function mainController($scope, $http) {
 	$scope.formData = {}
 	$http.get('/api/todos')
@@ -10,7 +9,7 @@ function mainController($scope, $http) {
 		.error(function(data) {
 			console.log('Error: ' + data)
 		})
-
+		
 	$scope.createTodo = function() {
 		$http.post('/api/todos', $scope.formData)
 			.success(function(data) {
@@ -33,4 +32,3 @@ function mainController($scope, $http) {
 			})
 	}
 }
-

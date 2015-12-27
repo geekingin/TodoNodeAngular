@@ -75,6 +75,10 @@ app.delete('/api/todos/:todo_id', function(req, res) {
 	})
 })
 
+// app.get('*', function(req, res) {
+// 	res.sendFile('./public/index.html')
+// })
+
 
 
 
