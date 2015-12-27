@@ -1,6 +1,7 @@
 angular.module('todoController', [])
     .controller('mainController', function($scope, Todos) {
         $scope.formData = {}
+        $scope.searchText = ''
 
         Todos.get()
             .success(function(data) {
