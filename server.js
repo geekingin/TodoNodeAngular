@@ -9,13 +9,76 @@ var methodOverride = require('method-override')
 var app = express()
 // configuration
 
-mongoose.connect('mongodb://node:nodeuser@mongo.onmodules.net:27017/uwO3mypu')
+mongoose.connect('mongodb://localhost/todo_node_angular')
 app.use(express.static(__dirname + '/public'))
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({'extended': 'true'}))					//todo
 app.use(bodyParser.json())												//todo
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }))			//todo
 app.use(methodOverride())
+
+// define model
+var Todo = mongoose.model('Todo', {
+	text: String
+})
+
+
+
+// routes
+
+// api
+// get all todos
+app.get('/api/todos', function(req, res) {
+	Todo.find(function(err, todos) {
+		if (err) {
+			res.send(err)
+			return 
+		}
+		res.json(todos)
+	})
+})
+
+app.post('/api/todos', function(req, res) {
+	Todo.create({
+		text: req.body.text,
+		done: false
+	}, function(err, todo) {
+		if (err) {
+			res.send(err)
+			return 
+		}
+		Todo.find(function(err, todos) {
+			if (err) {
+				res.send(err)
+				return 
+			}
+			res.json(todos)
+		})
+	})
+})
+
+app.delete('/api/todos/:todo_id', function(req, res) {
+	Todo.remove({
+		_id: req.params.todo_id
+	}, function(err, todo) {
+		if (err) {
+			res.send(err)
+			return 
+		}
+		Todo.find(function(err, todos) {
+			if (err) {
+				res.send(err)
+				return 
+			}
+			res.json(todos)
+		})
+	})
+})
+
+
+
+
+
 
 // start server
 app.listen(8080)
